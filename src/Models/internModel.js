@@ -23,15 +23,17 @@ const internModel = new mongoose.Schema({
     mobile : {
         type: Number,
         trim: true,
-        required : 'Phone no. is required',
-        unique : true,
+        required :[true,'Phone no. is required'],
+        unique : [true, 'phone number is not unique'],
         minlength : [10, 'minimum phone length should be 10'],
         maxlength : [10, 'maximum length should also be 10'],
         validate : {
             validator : function(mobile) {
                 return /^[0-9]{10}$/.test(mobile)
-            }, message : `{mobile} is not a valid phone number!`
+            }, message : `{mobile} is not a valid phone number!`, isasync : false
         }
+
+        //match : [/^[0-9]{10}$/,'pls fill valid mobile number']
     },
     collegeId : {
         type : ObjectId,
@@ -44,3 +46,5 @@ const internModel = new mongoose.Schema({
     }
 
 })
+
+module.exports=mongoose.model('intern',internModel)

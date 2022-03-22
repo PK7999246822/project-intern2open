@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const mongoose = require('mongoose')
 
-mongoose.connect("mongodb+srv://sp01041998:71HOQkRVAWXnVxw0@cluster0.deqvc.mongodb.net/group61Database?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect("mongodb+srv://sp01041998:71HOQkRVAWXnVxw0@cluster0.deqvc.mongodb.net/group61Database?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology : true , useCreateIndex: true})
     .then(() => console.log('mongodb running on 27017'))
     .catch(err => console.log(err))
 
