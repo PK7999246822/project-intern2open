@@ -1,4 +1,4 @@
-//const collegeModel = require("../Models/collegeModel")
+const collegeModel = require("../Models/collegeModel")
 const internModel = require("../Models/internModel")
 const mongoose = require("mongoose")
 
@@ -81,4 +81,28 @@ const intern = async function (req, res) {
 }
 
 
+const collegeDetails = async function(req, res){
+    clName=req.query.name
+    const data = await collegeModel.findOne({name : clName, isDeleted : false})
+    //console.log(data)
+    const obj = {}
+
+    const {name, fullName, logolink} = data
+    obj.name=name
+    obj.fullName=fullName
+    obj.logolink=logolink
+    //res.status(201).send({status : true, msg : "send", data: data})
+
+    const allInterns= await internModel.find({collegeId : data._id, isDeleted:false}).select({ collegeId:0, isDeleted:0, __v : 0})
+    
+    obj.interest = allInterns
+    //console.log(obj)
+    //console.log(allInterns)
+    res.status(400).send({status : true, msg: "interns details", data: obj})
+
+}
+
+
+
 module.exports.intern = intern
+module.exports.collegeDetails=collegeDetails

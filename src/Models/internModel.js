@@ -40,11 +40,12 @@ const internModel = new mongoose.Schema({
         ref: "college",
         required : 'college-id is required'
     },
+
     isDeleted : {
         type : Boolean,
         default : false
     }
 
-})
+}, {timestamps:true})
 
 module.exports=mongoose.model('intern',internModel)
