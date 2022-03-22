@@ -53,6 +53,11 @@ const intern = async function (req, res) {
                 return res.status(400).send({status : false, msg :"pls input correct mobile no." })
             }
 
+            const ismobilealreadyUsed = await internModel.findOne({mobile})
+            if(ismobilealreadyUsed){
+                return res.status(400).send({status : false, msg : "mobile no. already in use"})
+            }
+
 
             if (!isValid(collegeId)) {
                 return res.status(400).send({ status: false, msg: "collegeId is required" })
