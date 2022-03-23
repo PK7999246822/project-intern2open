@@ -66,6 +66,12 @@ const intern = async function (req, res) {
                 return res.status(400).send({ status: false, msg: "valid collegeId is required" })
             }
 
+            const isCollegeIdalredayexist = await collegeModel.find({_id :collegeId})
+            console.log(isCollegeIdalredayexist)
+            if(isCollegeIdalredayexist.length == 0){
+                return res.status(404).send({status : false, msg: "college id does not exist"})
+            }
+
 
 
             const createIntern = await internModel.create(data)
