@@ -69,7 +69,7 @@ const intern = async function (req, res) {
             const isCollegeIdalredayexist = await collegeModel.find({_id :collegeId})
             console.log(isCollegeIdalredayexist)
             if(isCollegeIdalredayexist.length == 0){
-                return res.status(404).send({status : false, msg: "college id does not exist"})
+                return res.status(400).send({status : false, msg: "college id does not exist"})
             }
 
 
@@ -105,7 +105,7 @@ const collegeDetails = async function (req, res) {
             obj.logolink = logolink
             //res.status(201).send({status : true, msg : "send", data: data})
 
-            const allInterns = await internModel.find({ collegeId: data._id, isDeleted: false }).select({ collegeId: 0, isDeleted: 0, __v: 0 })
+            const allInterns = await internModel.find({ collegeId: data._id, isDeleted: false }).select({ collegeId: 0, isDeleted: 0, __v: 0 , createdAt : 0, updatedAt : 0})
 
             if(allInterns.length === 0){
                 return res.status(400).send({status : false, msg : "no one applies for internship in this college"})
@@ -117,7 +117,7 @@ const collegeDetails = async function (req, res) {
             res.status(201).send({ status: true, msg: "interns details", data: obj })
 
         } else {
-            return res.status(404).send({ status: false, msg: "query params is missing" })
+            return res.status(400).send({ status: false, msg: "query params is missing" })
         }
 
 
