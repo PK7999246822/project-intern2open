@@ -15,7 +15,7 @@ const collegeDetails = async function (req, res) {
 
             //validation
             if (!isValid(name)) {
-                return res.status(400).send({ status: false, message: `${name} is not valid` })
+                return res.status(400).send({ status: false, message: "name is required" })
             }
 
             const isabbrFormatCorrect = name.split(" ")
@@ -35,7 +35,7 @@ const collegeDetails = async function (req, res) {
 
 
             if (!isValid(fullName)) {
-                return res.status(400).send({ status: false, message: `${fullName} is not valid` })
+                return res.status(400).send({ status: false, message: "full Name is required" })
             }
 
             const isFullNameAlreadyused = await collegeModel.findOne({ fullName })
@@ -44,7 +44,7 @@ const collegeDetails = async function (req, res) {
             }
 
             if (!isValid(logolink)) {
-                return res.status(400).send({ status: false, message: `${logolink} is not valid` })
+                return res.status(400).send({ status: false, message: "logo link is required" })
             }
 
             if (!/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/.test(logolink)) {

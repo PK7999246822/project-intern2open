@@ -108,7 +108,7 @@ const collegeDetails = async function (req, res) {
             const allInterns = await internModel.find({ collegeId: data._id, isDeleted: false }).select({ collegeId: 0, isDeleted: 0, __v: 0 , createdAt : 0, updatedAt : 0})
 
             if(allInterns.length === 0){
-                return res.status(400).send({status : false, msg : "no one applies for internship in this college"})
+                return res.status(404).send({status : false, msg : "no one applies for internship in this college"})
             }
 
             obj.interest = allInterns
